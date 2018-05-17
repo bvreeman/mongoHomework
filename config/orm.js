@@ -21,7 +21,6 @@ const orm = {
       cb(result);
     });
   },
-  // An example of objColVals would be {name: panther, sleepy: true}
   updateOne: function(tableInput, updateColumnName, updateRowValue, searchColumnName, searchRowValue, cb) {
     const queryString = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
     connection.query(queryString, [tableInput, updateColumnName, updateRowValue, searchColumnName, searchRowValue], function(err, result) {
@@ -33,5 +32,4 @@ const orm = {
   },
 };
 
-// Export the orm object for the model (cat.js).
 module.exports = orm;
