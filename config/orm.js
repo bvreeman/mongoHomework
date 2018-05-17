@@ -13,53 +13,21 @@ const orm = {
     });
   },
   insertOne: function(tableInput, columnName, burgerName, cb) {
-    let queryString = INSERT INTO ?? (??) VALUES (?)";
-
-    queryString += ' (';
-    queryString += cols.toString();
-    queryString += ') ';
-    queryString += 'VALUES (';
-    queryString += printQuestionMarks(vals.length);
-    queryString += ') ';
-
-    console.log(queryString);
-
-    connection.query(queryString, vals, function(err, result) {
+    const queryString = 'INSERT INTO ?? (??) VALUES (?)';
+    connection.query(queryString, [tableInput, columnName, burgerName], function(err, result) {
       if (err) {
         throw err;
       }
-
       cb(result);
     });
   },
   // An example of objColVals would be {name: panther, sleepy: true}
-  update: function(table, objColVals, condition, cb) {
-    let queryString = `UPDATE ${table}`;
-
-    queryString += ' SET ';
-    queryString += objToSql(objColVals);
-    queryString += ' WHERE ';
-    queryString += condition;
-
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
+  updateOne: function(tableInput, updateColumnName, updateRowValue, searchColumnName, searchRowValue, cb) {
+    const queryString = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
+    connection.query(queryString, [tableInput, updateColumnName, updateRowValue, searchColumnName, searchRowValue], function(err, result) {
       if (err) {
         throw err;
       }
-
-      cb(result);
-    });
-  },
-  delete: function(table, condition, cb) {
-    let queryString = `DELETE FROM ${table}`;
-    queryString += ' WHERE ';
-    queryString += condition;
-
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-
       cb(result);
     });
   },
