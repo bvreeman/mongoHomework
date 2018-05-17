@@ -3,27 +3,27 @@ const connection = require('../config/connection.js');
 
 // Object for all our SQL statement functions.
 const orm = {
-  selectAll: function(tableInput, cb) {
-    const queryString = 'SELECT * FROM ??';
-    connection.query(queryString, [tableInput], function(err, result) {
+  selectAll: function(cb) {
+    connection.query('SELECT * FROM burgers', function(err, result) {
       if (err) {
         throw err;
       }
       cb(result);
     });
   },
-  insertOne: function(tableInput, columnName, burgerName, cb) {
-    const queryString = 'INSERT INTO ?? (??) VALUES (?)';
-    connection.query(queryString, [tableInput, columnName, burgerName], function(err, result) {
+  insertOne: function(burgerName, cb) {
+    connection.query('INSERT INTO burgers SET ?', {
+      burger_name: burgerName,
+      devoured: false,
+    }, function(err, result) {
       if (err) {
         throw err;
       }
       cb(result);
     });
   },
-  updateOne: function(tableInput, updateColumnName, updateRowValue, searchColumnName, searchRowValue, cb) {
-    const queryString = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
-    connection.query(queryString, [tableInput, updateColumnName, updateRowValue, searchColumnName, searchRowValue], function(err, result) {
+  updateOne: function(burgerID, cb) {
+    connection.query('UPDATE burgers SET ? WHERE ?', [{ devoured: true }, { id: burgerID }], function(err, result) {
       if (err) {
         throw err;
       }
