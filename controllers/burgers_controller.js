@@ -15,16 +15,22 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   if (req.body.burger_name !== '') {
-    burger.insertOne(req.body.burger_name.trim(), function(result) {
-      res.redirect('/');
-    });
+    burger.insertOne(
+      ['name'],
+      [
+        req.body.burger_name.trim(),
+      ], function(result) {
+        // res.json({ id: result.insertID });
+        res.redirect('/');
+      },
+    );
   }
 });
 
-router.put('/:id', function(req, res) {
-  burger.updateOne(req.params.id, function() {
-    res.redirect('/');
-  });
-});
+// router.put('/api/:id', function(req, res) {
+//   burger.updateOnereq.params.id, function() {
+//       res.redirect('/index');
+//     });
+// });
 
 module.exports = router;

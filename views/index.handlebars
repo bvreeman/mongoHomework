@@ -1,11 +1,17 @@
 <h1>Burgers!</h1>
 
 <h2>Burgers Waiting to be Eaten</h2>
-
 <ul>
   {{#each burgers}}
     {{#unless this.devoured}}
-      {{> burgers/burger-block devoured=false}}
+            <form action="burger/eat/{{id}}" method="POST">
+            <div class="input-group">
+              <li class="form-control">{{id}}. {{burger_name}}</li>
+                <span class="input-group-btn">
+                  <button class="btn btn-danger devour-button" type="submit">Devour It!</button>
+                </span>
+            </div>
+          </form>
     {{/unless}}
   {{/each}}
 </ul>
@@ -15,7 +21,7 @@
 <ul>
   {{#each burgers}}
     {{#if this.devoured}}
-      {{> burgers/burger-block devoured=true}}
+
     {{/if}}
   {{/each}}
 </ul>
