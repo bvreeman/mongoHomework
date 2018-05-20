@@ -29,7 +29,7 @@ const orm = {
         throw err;
       }
       cb(result);
-    } );
+    });
   },
 };
 

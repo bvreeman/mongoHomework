@@ -21,7 +21,11 @@
 <ul>
   {{#each burgers}}
     {{#if this.devoured}}
-
+            <form action="burger/eat/{{id}}" method="POST">
+            <div class="input-group">
+              <li class="form-control">The {{burger_name}} has been eaten!</li>
+            </div>
+          </form>
     {{/if}}
   {{/each}}
 </ul>

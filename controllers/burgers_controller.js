@@ -15,15 +15,12 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   if (req.body.burger_name !== '') {
-    burger.insertOne(
-      ['name'],
-      [
-        req.body.burger_name.trim(),
-      ], function(result) {
-        // res.json({ id: result.insertID });
-        res.redirect('/');
-      },
-    );
+    burger.insertOne({
+      burger_name: req.body.text,
+      devoured: false,
+    }).then(function(elem) {
+      res.json(elem);
+    });
   }
 });
 
