@@ -13,21 +13,18 @@ router.get('/', function(req, res) {
   });
 });
 
-router.post('/', function(req, res) {
+router.post('/burger/create', function(req, res) {
   if (req.body.burger_name !== '') {
-    burger.insertOne({
-      burger_name: req.body.text,
-      devoured: false,
-    }).then(function(elem) {
-      res.json(elem);
+    burger.insertOne(req.body.burger_name, function() {
+      res.redirect('/');
     });
   }
 });
 
-// router.put('/api/:id', function(req, res) {
-//   burger.updateOnereq.params.id, function() {
-//       res.redirect('/index');
-//     });
-// });
+router.post('/burger/:id', function(req, res) {
+  burger.updateOne(req.params.id, function() {
+    res.redirect('/');
+  });
+});
 
 module.exports = router;

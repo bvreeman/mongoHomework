@@ -9,11 +9,11 @@ const orm = {
         throw err;
       }
       cb(result);
-      console.log(result);
+      // console.log(`selectAll ${result}`);
     });
   },
-  insertOne: function(tableInput, burgerName, cb) {
-    connection.query(`INSERT INTO ${tableInput} SET ?`, {
+  insertOne: function(burgerName, cb) {
+    connection.query('INSERT INTO SET ?', {
       burger_name: burgerName,
       devoured: false,
     }, function(err, result) {
@@ -21,6 +21,7 @@ const orm = {
         throw err;
       }
       cb(result);
+      // console.log(`insertOne ${result}`);
     });
   },
   updateOne: function(tableInput, burgerID, cb) {
@@ -29,6 +30,7 @@ const orm = {
         throw err;
       }
       cb(result);
+      // console.log(`updateOne ${result}`);
     });
   },
 };
