@@ -1,6 +1,16 @@
 // Import MySQL connection.
 const connection = require('../config/connection.js');
 
+function printQuestionMarks(num) {
+  const arr = [];
+
+  for (let i = 0; i < num; i++) {
+    arr.push('?');
+  }
+
+  return arr.toString();
+}
+
 // Object for all our SQL statement functions.
 const orm = {
   selectAll: function(tableInput, cb) {
@@ -12,11 +22,19 @@ const orm = {
       // console.log(`selectAll ${result}`);
     });
   },
-  insertOne: function(burgerName, cb) {
-    connection.query('INSERT INTO SET ?', {
-      burger_name: burgerName,
-      devoured: false,
-    }, function(err, result) {
+  insertOne: function(table, cols, vals, cb) {
+    let queryString = `INSERT INTO ${table}`;
+
+    queryString += ' (';
+    queryString += cols.toString();
+    queryString += ') ';
+    queryString += 'VALUES (';
+    queryString += printQuestionMarks(vals.length);
+    queryString += ') ';
+
+    console.log(queryString);
+
+    connection.query(queryString, vals, function(err, result) {
       if (err) {
         throw err;
       }
@@ -24,8 +42,8 @@ const orm = {
       // console.log(`insertOne ${result}`);
     });
   },
-  updateOne: function(tableInput, burgerID, cb) {
-    connection.query(`UPDATE ${tableInput} SET ? WHERE ?`, [{ devoured: true }, { id: burgerID }], function(err, result) {
+  updateOne: function(burgerID, cb) {
+    connection.query('UPDATE burgers SET devoured WHERE ?', [{ devoured: true }, { id: burgerID }], function(err, result) {
       if (err) {
         throw err;
       }

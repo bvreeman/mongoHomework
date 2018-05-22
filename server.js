@@ -9,10 +9,10 @@ const app = express();
 app.use(express.static('public'));
 
 // parse application/x-www-form-urlencoded
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse application/json
-app.use(bodyParser.json());
 
 // parse application/text
 app.use(bodyParser.text());

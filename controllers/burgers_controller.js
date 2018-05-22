@@ -13,17 +13,32 @@ router.get('/', function(req, res) {
   });
 });
 
-router.post('/burger/create', function(req, res) {
-  if (req.body.burger_name !== '') {
-    burger.insertOne(req.body.burger_name, function() {
-      res.redirect('/');
-    });
-  }
+router.post('/api/burgers', function(req, res) {
+  burger.insertOne([
+    'burger_name',
+  ], [
+    req.body.burger_name,
+  ], function(result) {
+    res.json({ id: result.insertID });
+  });
 });
 
-router.post('/burger/:id', function(req, res) {
-  burger.updateOne(req.params.id, function() {
-    res.redirect('/');
+router.put('/api/burgers/:id', function(req, res) {
+  const body = {
+    ...req.body,
+  };
+  console.log('LOOK BODY', body);
+  const fields = Object.keys(body);
+  console.log('LOOK FIELDS', fields);
+  const value = [];
+  for (const val in req.body) {
+    value.push(req.body[val]);
+  }
+  const params = [...fields, ...value];
+  console.log('LOOK PARAMS', params);
+  burger.updateOne(req.params.id, params, function() {
+
+    // res.redirect('/');
   });
 });
 
