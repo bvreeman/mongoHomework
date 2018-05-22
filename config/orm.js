@@ -11,6 +11,28 @@ function printQuestionMarks(num) {
   return arr.toString();
 }
 
+function objToSql(ob) {
+  const arr = [];
+
+  // loop through the keys and push the key/value as a string int arr
+  for (const key in ob) {
+    let value = ob[key];
+    // check to skip hidden properties
+    if (Object.hasOwnProperty.call(ob, key)) {
+      // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
+      if (typeof value === 'string' && value.indexOf(' ') >= 0) {
+        value = `'${value}'`;
+      }
+      // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
+      // e.g. {sleepy: true} => ["sleepy=true"]
+      arr.push(`${key}=${value}`);
+    }
+  }
+
+  // translate array of strings to a single comma-separated string
+  return arr.toString();
+}
+
 // Object for all our SQL statement functions.
 const orm = {
   selectAll: function(tableInput, cb) {
@@ -22,6 +44,7 @@ const orm = {
       // console.log(`selectAll ${result}`);
     });
   },
+
   insertOne: function(table, cols, vals, cb) {
     let queryString = `INSERT INTO ${table}`;
 
@@ -32,8 +55,6 @@ const orm = {
     queryString += printQuestionMarks(vals.length);
     queryString += ') ';
 
-    console.log(queryString);
-
     connection.query(queryString, vals, function(err, result) {
       if (err) {
         throw err;
@@ -42,8 +63,16 @@ const orm = {
       // console.log(`insertOne ${result}`);
     });
   },
-  updateOne: function(burgerID, cb) {
-    connection.query('UPDATE burgers SET devoured WHERE ?', [{ devoured: true }, { id: burgerID }], function(err, result) {
+
+  updateOne: function(table, objColVals, condition, cb) {
+    let queryString = `UPDATE ${table}`;
+
+    queryString += ' SET ';
+    queryString += objToSql(objColVals);
+    queryString += ' WHERE ';
+    queryString += condition;
+
+    connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
       }

@@ -14,10 +14,10 @@
               {{#unless this.devoured}}
                       <form>
                       <div class="input-group">
-                        <li class="form-control">{{id}}. {{burger_name}}</li>
+                        <li class="form-control">{{burger_name}}</li>
                         <br>
                           <span class="input-group-btn">
-                            <button class="btn btn-warning devour-button" type="submit" data-id={{id}}>Eat It!</button>
+                            <button class="btn btn-warning devour-button" type="submit" data-id="{{id}}" data-neweaten="{{devoured}}">Eat It!</button>
                           </span>
                       </div>
                       <br>
@@ -29,7 +29,7 @@
         <div class="col-md-3 col-s-12" id="addBurger">
           <h3>Add a Burger</h3>
           <br>
-          <form>
+          <form class="create-form">
             <div class="form-group">
               <label for="newBurger" id="addLabel">Burger Name:</label>
               <input type="text" id="newBurger" name="name">
