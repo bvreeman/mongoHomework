@@ -28,14 +28,16 @@
     "gulp-less": "^4.0.0"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^3.3.7",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "mongoose": "^5.1.5",
+    "morgan": "^1.9.0",
     "mysql": "^2.15.0",
-    "nodemon": "^1.17.4",
+    "nodemon": "^1.17.5",
     "request": "^2.87.0"
   }
 }
