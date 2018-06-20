@@ -1,5 +1,36 @@
-<div class="container-fluid" id="main">
-    <div class="row">
-        <p>HI</p>
+<div class="container-fluid">
+    <div class="col-md-12 jumbotron">
+        <div class="row">
+            <h1> Indeed Job Posting Scraper</h1>
+        </div> 
+        <br>
+        <div class="row">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="submitScrape" type="submit">Scrape Job Postings</button>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-12"> 
+        <div class="row">
+            {{#if article}}
+            {{#each article}}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <center><h4>{{this.title}}</h4></center>
+                </div>
+                <div class="panel-body">
+                    <center><a href='https://www.indeed.com{{this.link}}' target="_blank">View the Listing Here</a></center>
+                    <br><br>
+                    <center><button type="button" class="btn save" data-id={{this._id}}>Save Article</button></center>
+                </div>
+            </div>
+            {{/each}}
+        {{else}}
+        <div class="panel panel-default">
+            <div class="panel-body noArticles">
+            <p>Sorry! No new articles to show you. Try clicking the button above.</p>
+            </div>
+         </div>
+        {{/if}}
+        </div>
     </div>
 </div>

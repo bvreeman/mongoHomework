@@ -1,0 +1,40 @@
+body  {
+    background-image: url("/assets/img/connectwork.png");
+}
+
+.jumbotron {
+    text-align: center;
+    margin-top: 20px;
+    background-color: #f5f5f5!Important;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+}
+
+.noArticles {
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #f5f5f5;
+    font-size: 20px;
+}
+
+.navbar {
+    background-color: #f5f5f5;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.nav-item {
+    font-size: 18px;
+    margin-top: 12px;
+    margin-right: 10px;
+}
+
+.btn {
+    background-color: #1497FF;
+    color: white;
+    text-overflow: ellipsis!Important;
+    text-align: center!Important;
+    white-space: nowrap!Important;
+    border-radius: 6.25rem!Important;
+    font-size: 20px!Important;
+}
