@@ -11,9 +11,9 @@ $('#submitScrape').on('click', function() {
 
 
 // Handle Save Article button
-$('#saveArticle').on('click', function() {
+$('.saveArticle').on('click', function() {
   const thisId = $(this).attr('data-id');
-  console.log(thisId);
+  console.log('this is thisId ********', thisId);
   $.ajax({
     method: 'POST',
     url: `/articles/save/${thisId}`,

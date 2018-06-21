@@ -96,7 +96,7 @@ app.get('/scrape', function(req, res) {
 
 // GET requests to render Handlebars pages
 app.get('/', function(req, res) {
-  db.Article.find({}, function(error, data) {
+  db.Article.find({ saved: false }, function(error, data) {
     const hbsObject = {
       article: data,
     };
@@ -107,7 +107,7 @@ app.get('/', function(req, res) {
 // Route for getting all Articles from the db
 app.get('/articles', function(req, res) {
   // Grab every document in the Articles collection
-  db.Article.find({})
+  db.Article.find({ saved: false })
     .then(function(dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);
@@ -167,6 +167,40 @@ app.get('/saved', function(req, res) {
     res.render('saved', hbsObject);
   });
 });
+
+// Save an article
+app.post('/articles/save/:id', function(req, res) {
+  // Use the article id to find and update its saved boolean
+  console.log(req.params.id);
+  db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true })
+  // Execute the above query
+    .exec(function(err, doc) {
+    // Log any errors
+      if (err) {
+        console.log(err);
+      } else {
+      // Or send the document to the browser
+        res.send(doc);
+      }
+    });
+});
+
+// Delete an article
+app.post('/articles/delete/:id', function(req, res) {
+  // Use the article id to find and update its saved boolean
+  db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: false, notes: [] })
+  // Execute the above query
+    .exec(function(err, doc) {
+    // Log any errors
+      if (err) {
+        console.log(err);
+      } else {
+      // Or send the document to the browser
+        res.send(doc);
+      }
+    });
+});
+
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, function() {

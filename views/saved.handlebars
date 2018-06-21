@@ -8,32 +8,36 @@
         </div>
     </div>
     <div class="col-md-12">
-        {{#if article}}
-            {{#each article}}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4>{{this.title}}</h4>
+        <div class="row">
+            {{#if article}}
+                {{#each article}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <center><h4>{{this.title}}</h4></center>
+                        </div>
+                        <div class="panel-body">
+                            <p> {{this.summary}}</p>
+                            <center><a href='https://www.indeed.com{{this.link}}' target="_blank">View the Listing Here</a></center>
+                            <br><br>
+                            <center><div class="buttons">
+                                <button type="button" class="btn btn-success addNote" data-toggle="modal" data-target="#noteModal{{this._id}}" data-id={{this._id}}>Add a Note</button>
+                                <button type="button" class="btn btn-danger deleteArticle" id="deleteArticle" data-id={{this._id}}>Delete</button>
+                            </div></center>
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        <p> {{this.summary}}</p>
-                        <a href={{this.link}} target="_blank">{{this.link}}</a>
-                        <br><br>
-                        <button type="button" class="btn btn-success addNote" data-toggle="modal" data-target="#noteModal{{this._id}}" data-id={{this._id}}>Add a Note</button>
-                        <button type="button" class="btn btn-danger delete" data-id={{this._id}}>Delete</button>
-                    </div>
+                {{/each}}
+            {{else}}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>There are no saved articles.</h4>
                 </div>
-            {{/each}}
-        {{else}}
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h4>There are no saved articles.</h4>
             </div>
+            {{/if}}
         </div>
-        {{/if}}
     </div>
 </div>
 
-<!--Clicked Notes Modal-->
+{{!-- <!--Clicked Notes Modal-->
 {{#each article}}
     {{> notes-modal }}
-{{/each}}
+{{/each}} --}}
