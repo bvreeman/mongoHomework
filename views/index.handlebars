@@ -1,11 +1,11 @@
 <div class="container">
     <div class="col-md-12 jumbotron">
         <div class="row">
-            <h1> Indeed Job Posting Scraper</h1>
+            <h1> NY Times Article Scraper</h1>
         </div> 
         <br>
         <div class="row">
-            <button class="btn btn-outline-success my-2 my-sm-0" id="submitScrape" type="submit">Scrape Job Postings</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" id="submitScrape" type="submit">Scrape Articles</button>
         </div>
     </div>
     <br>
@@ -18,7 +18,8 @@
                     <center><h4>{{this.title}}</h4></center>
                 </div>
                 <div class="panel-body">
-                    <center><a href='https://www.indeed.com{{this.link}}' target="_blank">View the Listing Here</a></center>
+                    <center><p> {{this.summary}}</p></center>
+                    <center><a href={{this.link}} target="_blank">View the Articles Here</a></center>
                     <br><br>
                     <center><button type="button" class="btn saveArticle" id="saveArticle" data-id={{this._id}}>Save Article</button></center>
                 </div>

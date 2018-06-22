@@ -50,29 +50,34 @@ app.use(bodyParser.text());
 // Set Handlebars.
 const exphbs = require('express-handlebars');
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main',
+  partialsDir: path.join(__dirname, '/views/layouts/partials'),
+}));
 app.set('view engine', 'handlebars');
 
 // A GET route for scraping the echoJS website
 app.get('/scrape', function(req, res) {
   // First, we grab the body of the html with request
-  request('https://www.indeed.com/jobs?q=full+stack+developer&l=Minneapolis-Saint+Paul%2C+MN', function(error, response, html) {
+  request('https://www.nytimes.com/', function(error, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     const $ = cheerio.load(html);
     // Now, we grab every h2 within an article tag, and do the following:
-    $('div.result').each(function() {
-      // console.log('LOOK HERE _________---------', $(this).children('span.summary'));
+    $('article').each(function() {
+      // console.log('LOOK HERE _________---------', $(this).children('div.result'));
       const result = {};
 
       result.title = $(this)
-        .children('a')
+        .children('h2')
         .text();
 
-      // result.summary = $(this)
-      //   .children('span.summary')
-      //   .text();
+      result.summary = $(this)
+        .children('.summary')
+        .text();
+
 
       result.link = $(this)
+        .children('h2')
         .children('a')
         .attr('href');
 
@@ -85,7 +90,7 @@ app.get('/scrape', function(req, res) {
         })
         .catch(function(err) {
           // If an error occurred, send it to the client
-          return res.json(`There was a ${err} error`);
+          console.log(err);
         });
     });
 
