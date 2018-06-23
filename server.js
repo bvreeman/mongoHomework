@@ -150,6 +150,7 @@ app.get('/articles/:id', function(req, res) {
 //       // `req.params.id`. Update the Article to be associated with the new Note
 //       // { new: true } tells the query that we want it to return the updated User -- it
 //       // returns the original by default
+
 //       // Since our mongoose query returns a promise, we can chain another `.then` which
 //       // receives the result of the query
 //       return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
@@ -177,9 +178,7 @@ app.post('/notes/save/:id', function(req, res) {
     // Log any errors
     if (error) {
       console.log(error);
-    }
-    // Otherwise
-    else {
+    } else {
       // Use the article id to find and update it's notes
       db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { notes: note } })
       // Execute the above query

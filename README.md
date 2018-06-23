@@ -1,9 +1,27 @@
 # How to use this repo
 
-1. npm i
+The app can be viewed on the following repo:
 
-2. install gulp globally npm i -g gulp
+https://mongo-homework-bv.herokuapp.com/
 
-3. run gulp
+# What does the app do?
 
-4 git remote set-url origin 'insert repository name here without apostraphe'
+This app uses the cheerio web scraper to pull information from articles on the NY Times. It then displays the information on the DOM using Bootstrap. You are able to save articles and then record notes about the article.
+
+# Technologies Used
+
+Node.js
+Express.js
+MongoDB
+Mongoose
+Handlebars.js
+Bootstrap
+
+npm packages
+    express
+    bodyParser
+    logger
+    mongoose
+    path
+    request
+    cheerio
