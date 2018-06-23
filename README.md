@@ -10,18 +10,18 @@ This app uses the cheerio web scraper to pull information from articles on the N
 
 # Technologies Used
 
-Node.js
-Express.js
-MongoDB
-Mongoose
-Handlebars.js
-Bootstrap
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* Handlebars.js
+* Bootstrap
 
-npm packages
-    express
-    bodyParser
-    logger
-    mongoose
-    path
-    request
-    cheerio
+* npm packages
+    * express
+    * bodyParser
+    * logger
+    * mongoose
+    * path
+    * request
+    * cheerio
