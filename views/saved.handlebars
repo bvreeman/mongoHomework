@@ -1,7 +1,6 @@
 <!--Saved Articles Page-->
 
 <div class="container">
-
     <div class="col-md-12 jumbotron">
         <div class="text-center">
             <h1> Saved Articles</h1>
@@ -20,7 +19,7 @@
                             <center><a href={{this.link}} target="_blank">View the Article Here</a></center>
                             <br><br>
                             <center><div class="buttons">
-                                <button type="button" class="btn addNote" data-toggle="modal" data-target="noteModal{{this._id}}" data-id={{this._id}}>Add a Note</button>
+                                <button type="button" class="btn addNote" data-toggle="modal" data-target="#noteModal{{this._id}}" data-id={{this._id}}>Add a Note</button>
                                 <button type="button" class="btn btn-danger deleteArticle" id="deleteArticle" data-id={{this._id}}>Delete</button>
                             </div></center>
                         </div>
@@ -37,37 +36,7 @@
     </div>
 </div>
 
-{{!-- modal for displaying and creating notes --}}
-  <div id="noteModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Add a note</h4>
-        </div>
-        <div class="modal-body">
-          <input type="text" id="noteTitleEntry" class="noteInput" placeholder="Enter Title">
-          <input type="text" id="noteBodyEntry" class="noteInput" placeholder="Enter Body">
-          <div id="noteArea"></div>
-        </div>
-        <div class="modal-footer">
-          <h5 class="instructions">Click the note to read it, or X to delete</h5>
-          <button type="button" id="saveNote">Save Note</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {{!-- error modal --}}
-  <div id="error" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <h2>There was an error processing your request.  Please try again later.</h2>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--Clicked Notes Modal-->
+{{#each article}}
+    {{> notes-modal }}
+{{/each}}
