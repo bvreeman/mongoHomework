@@ -130,14 +130,14 @@ app.get('/articles/:id', function(req, res) {
   db.Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
     .populate('note')
-    .then(function(dbArticle) {
-      // If we were able to successfully find an Article with the given id, send it back to
-      // the client
-      res.json(dbArticle);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
+    // now, execute our query
+    .exec(function(error, doc) {
+      // Log any errors
+      if (error) {
+        console.log(error);
+      } else {
+        res.json(doc);
+      }
     });
 });
 
